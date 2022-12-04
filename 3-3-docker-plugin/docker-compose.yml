@@ -15,7 +15,7 @@ services:
 
   flog:
     image: "mingrammer/flog:0.4.3"
-    command: flog -f json -t stdout -w -l
+    command: flog -s 2s  -f json -t stdout -w -l
     logging:
       driver: "loki"
       options:
