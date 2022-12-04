@@ -22,14 +22,17 @@ services:
         hard: -1
 
   logstash:
-    image: "docker.elastic.co/logstash/logstash:8.1.0"
+    # image: "docker.elastic.co/logstash/logstash:8.1.0"
+    build:
+      context: ./logstash
+      dockerfile: "Dockerfile"
     command: --log.level=debug --enable-local-plugin-development
     ports:
       - "9600:9600"
     environment:
       - ELASTIC_PASSWORD=elastic
     volumes:
-      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     depends_on:
       - elasticsearch
 
